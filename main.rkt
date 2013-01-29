@@ -7,14 +7,35 @@
 
 #lang s-exp swindle/turbo
 
-(require racklog)
-(provide (all-from racklog))
-
 (require swindle/clos swindle/extra)
-(provide (all-from swindle/turbo)
+(require (only racket/base
+               for for/list for/vector
+               for/hash for/hasheq for/hasheqv
+               for/and for/or for/sum for/product
+               for/lists for/first for/last for/fold
+               for* for*/list for*/vector
+               for*/hash for*/hasheq for*/hasheqv
+               for*/and for*/or for*/sum for*/product
+               for*/lists for*/first for*/last for*/fold
+               in-list in-mlist in-vector in-string
+               in-bytes in-port in-input-port-bytes
+               in-input-port-chars in-lines in-bytes-lines
+               in-hash in-hash-keys in-hash-values in-hash-pairs
+               in-directory in-producer in-value in-indexed
+               in-sequences in-cycle in-parallel
+               in-values-sequence in-values*-sequence
+               stop-before stop-after))
+
+(provide (all-from racket/base)
+         (all-from swindle/turbo)
          (all-from swindle/clos)
-         (all-from swindle/extra)
-         install-poem-printer)
+         (all-from-except swindle/extra amb amb-assert amb-collect)
+         install-poem-printer
+         repl-printer)
+
+
+;; (require racklog)
+;; (provide (all-from racklog))
 
 (define* (install-poem-printer)
   (global-port-print-handler write-object)
